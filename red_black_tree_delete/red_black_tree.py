@@ -60,10 +60,13 @@ class RBTree:
         original_color = node_to_be_deleted.color
         if node_to_be_deleted.left.val is None:
             x = node_to_be_deleted.right
-            self.transplant(node_to_be_deleted, x)
+            # self.transplant(node_to_be_deleted, x)
+            x.val, node_to_be_deleted.val = node_to_be_deleted.val, x.val
+
         elif node_to_be_deleted.right.val is None:
             x = node_to_be_deleted.left
-            self.transplant(node_to_be_deleted, x)
+            x.val, node_to_be_deleted.val = node_to_be_deleted.val, x.val
+            # self.transplant(node_to_be_deleted, x)
         else:
             temp = node_to_be_deleted.left
             y = temp
@@ -75,8 +78,9 @@ class RBTree:
             if y.parent is node_to_be_deleted:
                 x.parent = y
             else:
-                self.transplant(y, y.right)
-            if y.left:
+                y.val, y.right.val = y.right.val, y.val
+                # self.transplant(y, y.right)
+            if y.left.val is not None:
                 y.parent.right = y.left
             else:
                 y.parent.right = None
@@ -229,6 +233,6 @@ tree.root.left.right.right = node_7
 node_7.parent = tree.root.left.right
 
 
-tree.delete_node(node_4)
+tree.delete_node(node_6)
 print("Che")
 
