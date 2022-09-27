@@ -1,55 +1,25 @@
-from graph import *
 from input_output_data import *
+import queue
 
-start_point = Vertex('empty')
-width, height, start_i, start_j, color_to_repaint, field = unpack()
+width, height, start_row, start_column, color_to_repaint, field = unpack()
+color_to_be_repainted = field[start_row][start_column]
 
-color_to_be_repainted = field[start_i][start_j]
-edges = {}
-vertexes: List[List[Vertex]] = []
+my_q = queue.Queue()
 
-# Creating 2d array of vertexes
+my_q.put([start_row, start_column])
 
-for i in range(height):
-    vertexes.append([])
-    for j in range(width):
-        vertexes[i].append(Vertex(field[i][j]))
+while not my_q.empty():
+    row, column = my_q.get()
+    if field[row][column] != color_to_be_repainted:
+        continue
+    field[row][column] = color_to_repaint
+    if row > 0:
+        my_q.put([row - 1, column])
+    if row < len(field) - 1:
+        my_q.put([row + 1, column])
+    if column > 0:
+        my_q.put([row, column - 1])
+    if column < len(field[0]) - 1:
+        my_q.put([row, column + 1])
 
-# Creating dict of edges
-
-for i in range(height):
-    for j in range(width):
-        if vertexes[i][j].color == color_to_be_repainted:
-            if i > 0:
-                if vertexes[i - 1][j].color == color_to_be_repainted:
-                    edges[vertexes[i][j]] = [vertexes[i - 1][j]]
-            if i < height - 1:
-                if vertexes[i + 1][j].color == color_to_be_repainted:
-                    if vertexes[i][j] in edges.keys():
-                        temp = edges.get(vertexes[i][j])
-                        temp.append(vertexes[i + 1][j])
-                        edges[vertexes[i][j]] = temp
-                    else:
-                        edges[vertexes[i][j]] = [vertexes[i + 1][j]]
-            if j > 0:
-                if vertexes[i][j - 1].color == color_to_be_repainted:
-                    if vertexes[i][j] in edges.keys():
-                        temp = edges.get(vertexes[i][j])
-                        temp.append(vertexes[i][j - 1])
-                        edges[vertexes[i][j]] = temp
-                    else:
-                        edges[vertexes[i][j]] = [vertexes[i][j - 1]]
-            if j < width - 1:
-                if vertexes[i][j + 1].color == color_to_be_repainted:
-                    if vertexes[i][j] in edges.keys():
-                        temp = edges.get(vertexes[i][j])
-                        temp.append(vertexes[i][j + 1])
-                        edges[vertexes[i][j]] = temp
-                    else:
-                        edges[vertexes[i][j]] = [vertexes[i][j + 1]]
-
-start_point: Vertex = vertexes[start_i][start_j]
-
-graph_1 = Graph(edges, vertexes)
-graph_1.repaint_graph(start_point, color_to_repaint)
-output(graph_1.parse_vertexes_into_str_array())
+output(field)
