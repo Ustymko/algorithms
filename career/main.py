@@ -5,7 +5,7 @@ length, positions = unpack()
 i = length - 1
 stack = []
 
-for j in range(0, len(positions[i])):
+for j in range(len(positions[i])):
     stack.insert(0, [i, j, positions[i][j]])
     while stack:
         current_coord = stack.pop(0)
