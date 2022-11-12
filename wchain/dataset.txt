@@ -1,0 +1,55 @@
+        (1)
+10
+crates
+car
+cats
+crate
+rate
+at
+ate
+tea
+rat
+a
+
+Expected result = 6
+
+        (2)
+5
+b
+bcad
+bca
+bad
+bd
+
+Expected result = 4
+
+        (3)
+3
+word
+anotherword
+yetanotherword
+
+Expected result = 1
+
+        (4)
+18
+rain
+ran
+sprain
+an
+prain
+a
+crates
+crat
+crate
+rat
+abcdefgh
+abcdefg
+abcefg
+abceg
+b
+bc
+bcg
+abcg
+
+Expected result = 8
