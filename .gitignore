@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# No need for XML and IML files in this repo
+*.xml
+*.iml
