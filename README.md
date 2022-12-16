@@ -26,3 +26,11 @@ Structure of positions in this company looks like a pyramide, where heigher leve
 <img src="https://user-images.githubusercontent.com/92269527/207985462-d3c7be3c-8003-4d74-b8da-e184116c9a18.png">
 </p>
 
+# 
+# <p align="center">Wchain</p>
+Two people are playing in linguistic game. At the beginning, there's a list with N words. First player chooses any word w1 and deletes some letter to make another word w2 from the same list. After that another playes does the same with the word w2.
+Game ends in one of the two following ways:
+* Remains the word consisting of only one letter
+* It's unreal to delete any letter to make another word from the list.
+
+Find the length of maximum chain of words that can be created from defined list of words.
